@@ -30,6 +30,7 @@ const deleteB=document.createElement("button")
 
     
   });
+
   
 form.reset()
 
@@ -37,13 +38,27 @@ form.reset()
 button.addEventListener("click", addNote);
 
 
-let deleteButton= document.querySelector(".delete")
-
-
 const deleteCard=function (e){
 
-console.log(Hello)
-}
+    console.log("hello")
+    const deleteButton = e.target;
+    const noteCards = deleteButton.parentElement;
+ const container = document.querySelector(".noteContainer");
+
+    let index= Array.from(container.children).indexOf(noteCards)
+    notes.splice(index,1)
+    noteCards.remove()
+ }
 
 
-deleteButton.addEventListener('click',deleteCard)
+ const container = document.querySelector(".noteContainer");
+container.addEventListener('click',(e)=>{
+    let event =e.target
+    if(event.classList.contains("delete")){
+        deleteCard(e)
+    }
+})
+
+
+    
+
