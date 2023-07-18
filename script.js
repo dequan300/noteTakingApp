@@ -3,6 +3,7 @@ const button = document.querySelector("#button")
 let form = document.querySelector("#form")
 
 
+
 const addNote = function (e) {
   e.preventDefault();
   const container = document.querySelector(".noteContainer");
@@ -10,10 +11,13 @@ const addNote = function (e) {
 
   let input = document.querySelector("input").value;
   notes.push(input);
-const noteCards = document.createElement("div")
-noteCards.classList.add("notes");
+// const noteCards = document.createElement("div")
+// noteCards.classList.add("notes");
 
   notes.forEach(element => {
+    const noteCards = document.createElement("div"); // Create a new noteCards for each note
+    noteCards.classList.add("notes");
+
 const p= document.createElement("p")
 const edit=document.createElement("button")
 const deleteB=document.createElement("button")
@@ -26,7 +30,7 @@ const deleteB=document.createElement("button")
     noteCards.appendChild(p)
     noteCards.appendChild(edit)
     noteCards.appendChild(deleteB)
-    container.appendChild(noteCards.cloneNode(true)); // Append a copy of noteCards to the container
+    container.appendChild(noteCards); // Append a copy of noteCards to the container
 
     
   });
@@ -37,27 +41,30 @@ form.reset()
 };
 button.addEventListener("click", addNote);
 
+const container = document.querySelector(".noteContainer");
+container.addEventListener('click',(e)=>{
+    if(e.target.classList.contains("delete")){
+        deleteCard(e)
+    }
+})
 
 const deleteCard=function (e){
 
     console.log("hello")
     const deleteButton = e.target;
     const noteCards = deleteButton.parentElement;
+    console.log(noteCards)
  const container = document.querySelector(".noteContainer");
+ console.log(Array.from(container.children))
 
     let index= Array.from(container.children).indexOf(noteCards)
+
+    console.log(index)
     notes.splice(index,1)
     noteCards.remove()
  }
 
-
- const container = document.querySelector(".noteContainer");
-container.addEventListener('click',(e)=>{
-    let event =e.target
-    if(event.classList.contains("delete")){
-        deleteCard(e)
-    }
-})
+ 
 
 
     
