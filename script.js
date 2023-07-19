@@ -45,7 +45,8 @@ const container = document.querySelector(".noteContainer");
 container.addEventListener('click',(e)=>{
     if(e.target.classList.contains("delete")){
         deleteCard(e)
-    }
+    }else if(e.target.classList.contains("edit"))
+    edit(e)
 })
 
 const deleteCard=function (e){
@@ -55,7 +56,6 @@ const deleteCard=function (e){
     const noteCards = deleteButton.parentElement;
     console.log(noteCards)
  const container = document.querySelector(".noteContainer");
- console.log(Array.from(container.children))
 
     let index= Array.from(container.children).indexOf(noteCards)
 
@@ -64,7 +64,14 @@ const deleteCard=function (e){
     noteCards.remove()
  }
 
- 
+
+
+ const edit =function(e){
+  let edit = e.parentElement
+  const input=document.createElement(input).value
+  const p =noteCards.p
+
+ }
 
 
     
