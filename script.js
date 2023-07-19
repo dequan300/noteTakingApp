@@ -45,8 +45,7 @@ const container = document.querySelector(".noteContainer");
 container.addEventListener('click',(e)=>{
     if(e.target.classList.contains("delete")){
         deleteCard(e)
-    }else if(e.target.classList.contains("edit"))
-    edit(e)
+    }
 })
 
 const deleteCard=function (e){
@@ -66,13 +65,40 @@ const deleteCard=function (e){
 
 
 
- const edit =function(e){
-  let edit = e.parentElement
-  const input=document.createElement(input).value
-  const p =noteCards.p
+ const edit =function(editButton){
+  const noteCards = editButton.target.parentElement
+  console.log(noteCards)
+  const p =noteCards.querySelector("p")
 
+  const input=document.createElement("input")
+  input.value=p.textContent
+  noteCards.replaceChild(input, p);
+
+
+  input.addEventListener("blur",()=>{
+    saveEditedText(input,noteCards)
+  })
+
+  input.addEventListener("keypress",(e)=>{
+    if(e.key==="enter"){
+      saveEditedText(input,noteCards)
+    }
+  })
  }
 
 
-    
+    function saveEditedText(inputField,noteCards){
+      const editedText=inputField.value
+      const p =document.createElement("p")
+      p.textContent=editedText
+      noteCards.replaceChild(p,inputField)
+      
+      const index =Array.from(container.children).indexOf(noteCards)
+      notes[index]=editedText
+    }
 
+container.addEventListener("click",(e)=>{
+  if(e.target.classList.contains("edit")){
+    edit(e)
+  }
+})
